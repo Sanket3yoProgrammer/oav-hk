@@ -29,103 +29,133 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 dark:bg-gray-900">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5 flex items-center gap-2">
-            <GraduationCap className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold bg-gradient-to-r from-yellow-500 via-orange-500 to-blue-600 bg-clip-text text-transparent">
-              OAV H. Katapali
-            </span>
-          </a>
-        </div>
-        
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" aria-hidden="true" />
-            ) : (
-              <Menu className="h-6 w-6" aria-hidden="true" />
-            )}
-          </button>
-        </div>
-
-        <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 flex items-center gap-1 transition-colors dark:text-gray-200"
-            >
-              <item.icon className="h-4 w-4" />
-              {item.name}
+    <>
+      <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-40 dark:bg-gray-900">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <div className="flex lg:flex-1">
+            <a href="#" className="-m-1.5 p-1.5 flex items-center gap-2">
+              <GraduationCap className="h-8 w-8 text-blue-600" />
+              <span className="text-xl font-bold bg-gradient-to-r from-yellow-500 via-orange-500 to-blue-600 bg-clip-text text-transparent">
+                OAV H. Katapali
+              </span>
             </a>
-          ))}
-        </div>
-
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <div className="flex items-center gap-4">
+          </div>
+          
+          <div className="flex items-center gap-4 lg:hidden">
             <DarkModeToggle />
-            {user ? (
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-700">Welcome, {user.name}</span>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-sm font-semibold leading-6 text-white bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition-colors"
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-200"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 flex items-center gap-1 transition-colors dark:text-gray-200"
+              >
+                <item.icon className="h-4 w-4" />
+                {item.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <div className="flex items-center gap-4">
+              <DarkModeToggle />
+              {user ? (
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-gray-700 dark:text-gray-200">Welcome, {user.name}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 text-sm font-semibold leading-6 text-white bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition-colors"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-sm font-semibold leading-6 text-white bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition-colors"
                 >
-                  <LogOut className="h-4 w-4" />
-                  Logout
+                  Log in
+                </Link>
+              )}
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {mobileMenuOpen && (
+        <div className="lg:hidden">
+          <div 
+            className="fixed inset-0 bg-gray-800/60 backdrop-blur-sm z-50"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          
+          <div
+            className={`
+              fixed inset-y-0 right-0 z-50 w-[300px] bg-white dark:bg-gray-900 shadow-xl 
+              transform transition-transform duration-300 ease-in-out
+              ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+            `}
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-end mb-8">
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  <X className="h-6 w-6 text-gray-500 dark:text-gray-400" />
                 </button>
               </div>
-            ) : (
-              <Link
-                to="/login"
-                className="text-sm font-semibold leading-6 text-white bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition-colors"
-              >
-                Log in
-              </Link>
-            )}
-          </div>
-        </div>
-      </nav>
 
-      {/* Mobile menu */}
-      <div className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="fixed inset-0 z-50">
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 flex items-center gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <item.icon className="h-5 w-5" />
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-                <div className="py-6">
+              <div className="space-y-4">
+                {navigation.map((item) => (
                   <a
-                    href="#login"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center gap-3 px-4 py-3 text-base font-semibold text-gray-900 dark:text-gray-100 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <item.icon className="h-5 w-5 text-blue-600" />
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+
+              <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
+                {user ? (
+                  <div className="space-y-3">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Signed in as {user.name}</p>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-white bg-blue-600 px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="w-full flex items-center justify-center text-sm font-semibold text-white bg-blue-600 px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Log in
-                  </a>
-                </div>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }
