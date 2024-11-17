@@ -107,10 +107,10 @@ function AppContent() {
                   <h4 className="text-xl font-bold">Quick Links</h4>
                   <ul className="space-y-2">
                     <li className="hover:text-primary-400 transition-colors">
-                      <a href="/admissions">Admissions</a>
+                      <a href="#">Admissions</a>
                     </li>
                     <li className="hover:text-primary-400 transition-colors">
-                      <a href="/academics">Programs</a>
+                      <a href="#">Programs</a>
                     </li>
                   </ul>
                 </div>
