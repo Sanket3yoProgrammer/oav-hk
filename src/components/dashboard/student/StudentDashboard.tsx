@@ -37,7 +37,7 @@ export default function StudentDashboard() {
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg shadow-lg p-6 sm:p-8">
         <div className="flex items-center gap-4">
-          <div className="h-16 w-16 rounded-full bg-white flex items-center justify-center">
+          <div className="h-16 w-16 min-h-[4rem] min-w-[4rem] rounded-full bg-white flex items-center justify-center">
             <span className="text-2xl font-bold text-blue-600">
               {user?.name?.[0].toUpperCase()}
             </span>
