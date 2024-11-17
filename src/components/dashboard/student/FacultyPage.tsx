@@ -13,7 +13,7 @@ const teachers = [
   {
     id: 1,
     name: 'Mr. Nigamananda Mohapatra',
-    subject: 'Physics',
+    subject: 'Science',
     gender: 'male',
     image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3',
     bio: '"Education is not the filling of a pail, but the lighting of a fire." I believe in making science accessible and exciting for every student.',
